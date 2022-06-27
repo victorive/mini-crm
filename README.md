@@ -5,7 +5,7 @@
 ## Setup instructions
 
 - Clone the repo: [mini-crm](https://github.com/victorive/mini-crm.git)
-- Navigate to the project directory eg. `cd project-directory` PS: Replace the project directory with the directory where you cloned the project.
+- Navigate to the project directory eg. `cd mini-crm`
 - Open the `.env.example` file in the root of your project directory and copy the contents of the file.
 - Create a new file with the name `.env` in the root directory of your project and paste the contents of the file you just copied.
 - Connfigure your database credentials inside the `.env` file and save.
