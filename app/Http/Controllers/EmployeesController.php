@@ -63,17 +63,23 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // dd($request);
-        $employee = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'company' => 'required',
-            'email' => 'email',
-            'phone' => 'numeric',
-            'website' => 'url'
-        ]);
+        try {
 
-        Employee::where('id', $id)->update($employee);
+            $employee = $request->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'company_id' => '',
+                'email' => 'email',
+                'phone' => '',
+                'website' => 'url'
+            ]);
+
+            Employee::where('id', $id)->update($employee);
+                 
+        } catch (\Throwable $th) {
+            
+            return $th->getMessage();
+        }
 
         return back()->with('message', 'Employee updated!');
     }
