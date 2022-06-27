@@ -32,7 +32,7 @@ class CompaniesController extends Controller
             ]);
     
             if($request->hasFile('logo')){
-    
+                https://github.com/victorive/mini-crm.git
                 // $request->validate([
                 //     'logo' => Rule::dimensions(['min_width=100','min_height=100'])
                 // ]);
