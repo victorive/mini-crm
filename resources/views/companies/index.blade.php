@@ -30,12 +30,12 @@
                 <td>{{ $company->email }}</td>
                 <td>{{ $company->website }}</td>
                 <td>
-                    <a href="/companies/{{ $company->id }}" class="btn btn-primary"><i class="fas fa-file"></i></a>
-                    <a href="/companies/edit/{{ $company->id }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="/companies/{{ $company->id }}">
+                    <a href="/companies/{{ $company->id }}" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Show company"><i class="fas fa-file"></i></a>
+                    <a href="/companies/edit/{{ $company->id }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit company"><i class="fas fa-edit"></i></a>
+                    <form method="POST" action="/companies/{{ $company->id }}" style="display: inline">
                       @csrf
                       @method('DELETE')
-                      <button class="btn btn-danger" type="submit"><i class="far fa-trash-alt"></i></button>
+                      <button class="btn btn-danger" type="submit" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete company"><i class="far fa-trash-alt"></i></button>
                     </form>
                 </td>
             </tr>     

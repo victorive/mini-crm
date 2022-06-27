@@ -27,16 +27,16 @@
                 <th scope="row">{{ $employee->id }}</th>
                 <td>{{ $employee->first_name }}</td>
                 <td>{{ $employee->last_name }}</td>
-                <td>{{ $employee->company }}</td>
+                <td>{{ $employee->company_id }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
                 <td>
-                    <a href="/employees/{{ $employee->id }}" class="btn btn-primary"><i class="fa fa-file"></i></a>
-                    <a href="/employees/edit/{{ $employee->id }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
-                    <form method="POST" action="/employees/{{ $employee->id }}">
+                    <a href="/employees/{{ $employee->id }}" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="Show user"><i class="fa fa-file"></i></a>
+                    <a href="/employees/edit/{{ $employee->id }}" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top" title="Edit user"><i class="fas fa-edit"></i></a>
+                    <form method="POST" action="/employees/{{ $employee->id }}" style="display: inline">
                         @csrf
                         @method('DELETE')
-                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt" data-bs-toggle="tooltip" data-bs-placement="top" title="Delete user"></i></button>
                     </form>
                 </td>
             </tr>

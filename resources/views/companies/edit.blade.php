@@ -17,9 +17,11 @@
             <p style="color: red">{{ $message }}</p>
           @enderror
         </div>
+
         <div class="col-12">
-            <img width="100" height="100" src="{{ asset('storage/' . $company->logo) }}">
+            <img width="100" height="100" src="{{$company->logo ? asset('storage/' . $company->logo) : asset('images/acumen-logo.jpeg')}}">
         </div>
+
         <div class="col-12">
             <label for="logo" class="form-label">Company logo</label>
             <input type="file" name="logo" class="form-control">
@@ -27,6 +29,7 @@
             <p style="color: red">{{ $message }}</p>
             @enderror
         </div>
+
         <div class="col-12">
           <label for="email" class="form-label">Email</label>
           <input type="email" name="email" class="form-control" value="{{ $company->email }}">
@@ -34,6 +37,7 @@
             <p style="color: red">{{ $message }}</p>
           @enderror
         </div>
+
         <div class="col-12">
           <label for="website" class="form-label">Website</label>
           <input type="url" name="website" class="form-control" value="{{ $company->website }}">
@@ -41,6 +45,7 @@
             <p style="color: red">{{ $message }}</p>
           @enderror
         </div>
+
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Update Company</button>
         </div>

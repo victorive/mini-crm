@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Http\Request;
 
@@ -11,13 +12,15 @@ class EmployeesController extends Controller
     public function index()
     {
         return view('employees.index', [
-            'employees' => Employee::paginate(10)
+            'employees' => Employee::with('company')->paginate(10)
         ]);
     }
 
     public function create()
     {
-        return view('employees.create');
+        return view('employees.create', [
+            'companies' => Company::all()
+        ]);
     }
 
     public function store(Request $request)
@@ -25,6 +28,7 @@ class EmployeesController extends Controller
         $employee = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
+            'company' => 'required',
             'email' => 'email',
             'phone' => 'numeric',
             'website' => 'url'
@@ -45,7 +49,8 @@ class EmployeesController extends Controller
     public function edit($id)
     {
         return view('employees.edit', [
-            'employee' => Employee::find($id)
+            'employee' => Employee::find($id),
+            'companies' => Company::all()
         ]);
     }
 
@@ -62,6 +67,7 @@ class EmployeesController extends Controller
         $employee = $request->validate([
             'first_name' => 'required',
             'last_name' => 'required',
+            'company' => 'required',
             'email' => 'email',
             'phone' => 'numeric',
             'website' => 'url'

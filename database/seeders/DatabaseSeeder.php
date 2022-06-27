@@ -19,20 +19,40 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
 
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@admin.com',
-            'password' => Hash::make('password')
-        ]);
+        // User::create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@admin.com',
+        //     'password' => Hash::make('password')
+        // ]);
 
-        $company = Company::factory()->create([
-            'name' => 'Test Test',
-            'email' => 'test@test.com', 
-            'website' => 'https://test.com'
-        ]);
+        // $company = Company::factory()->create([
+        //     'name' => 'Test Test',
+        //     'email' => 'test@test.com', 
+        //     'website' => 'https://test.com'
+        // ]);
 
-        Employee::factory(10)->create([
-            'company' => $company->id
-        ]);
+        // $company2 = Company::factory()->create([
+        //     'name' => 'Company 2',
+        //     'email' => 'test@test.com', 
+        //     'website' => 'https://test.com'
+        // ]);
+
+        // $company3 = Company::factory()->create([
+        //     'name' => 'Company 3',
+        //     'email' => 'test@test.com', 
+        //     'website' => 'https://test.com'
+        // ]);
+
+        // Employee::factory(10)->create([
+        //     'company_id' => $company->id
+        // ]);
+
+        // Employee::factory(10)->create([
+        //     'company_id' => $company2->id
+        // ]);
+        
+        // Employee::factory(10)->create([
+        //     'company_id' => $company3->id
+        // ]);
     }
 }
