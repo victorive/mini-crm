@@ -18,7 +18,7 @@ use App\Http\Controllers\EmployeesController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 Route::middleware('auth')->group(function(){
@@ -35,7 +35,12 @@ Route::middleware('auth')->group(function(){
 
     //Employees
     Route::get('/employees', [EmployeesController::class, 'index'])->name('employees');
-
+    Route::get('/employees/create', [EmployeesController::class, 'create']);
+    Route::post('/employees', [EmployeesController::class, 'store']);
+    Route::get('/employees/edit/{id}', [EmployeesController::class, 'edit']);
+    Route::put('employees/{id}', [EmployeesController::class, 'update']);
+    Route::delete('employees/{id}', [EmployeesController::class, 'destroy']);
+    Route::get('employees/{id}', [EmployeesController::class, 'show']);
 });
 
 Auth::routes(['register' => false]);

@@ -2,61 +2,51 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeesController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        return view('employees.index');
+        return view('employees.index', [
+            'employees' => Employee::paginate(10)
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('employees.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        $employee = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'email',
+            'phone' => 'numeric',
+            'website' => 'url'
+        ]);
+
+        Employee::create($employee);
+
+        return redirect('/employees')->with('message', 'Employee created!');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        return view('employees.show', [
+            'employee' => Employee::find($id)
+        ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        return view('employees.edit', [
+            'employee' => Employee::find($id)
+        ]);
     }
 
     /**
@@ -68,17 +58,24 @@ class EmployeesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // dd($request);
+        $employee = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'email' => 'email',
+            'phone' => 'numeric',
+            'website' => 'url'
+        ]);
+
+        Employee::where('id', $id)->update($employee);
+
+        return back()->with('message', 'Employee updated!');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        Employee::where('id', $id)->delete();
+
+        return back()->with('message', 'Employee deleted!');
     }
 }

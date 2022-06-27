@@ -45,7 +45,7 @@
                         @guest
                             @if (Route::has('login'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                    {{-- <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a> --}}
                                 </li>
                             @endif
 
@@ -78,6 +78,7 @@
             </div>
         </nav>
 
+        @auth
         <aside id="sidebar" class="sidebar bg-white shadow-sm">
             <ul class="sidebar-nav" id="sidebar-nav">
               <li class="nav-item">
@@ -98,7 +99,8 @@
                 </a>
               </li>
             </ul>
-          </aside>
+        </aside>
+        @endauth
 
         <main id="main" class="py-4 main">
             @yield('content')

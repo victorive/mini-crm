@@ -25,8 +25,8 @@ class CompaniesController extends Controller
     {
         $details = $request->validate([
             'name' => 'required',
-            'email' => ['required', 'email'],
-            'website' => 'required'
+            'email' => 'required', 'email',
+            'website' => 'url'
         ]);
 
         if($request->hasFile('logo')){

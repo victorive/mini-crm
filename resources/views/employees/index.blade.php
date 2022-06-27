@@ -1,11 +1,14 @@
 @extends('layouts.app')
-
 @section('content')
+
+{{ session('message') }}
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Employees</h5>
-      <button type="button" class="btn btn-success" style="margin-bottom: 10px">Create new employee</button>
-      <!-- Bordered Table -->
+     <a href="/employees/create" class="btn btn-success" style="margin-bottom: 10px">Create new employee</a>
+
+    @unless (count($employees) == 0)
+
       <table class="table table-bordered">
         <thead>
           <tr>
@@ -19,74 +22,33 @@
           </tr>
         </thead>
         <tbody>
+            @foreach ($employees as $employee)
             <tr>
-                <th scope="row">1</th>
-                <td>Brandon Jacob</td>
-                <td>Designer</td>
-                <td>28</td>
-                <td>2016-05-25</td>
-                <td>0987654321</td>
+                <th scope="row">{{ $employee->id }}</th>
+                <td>{{ $employee->first_name }}</td>
+                <td>{{ $employee->last_name }}</td>
+                <td>{{ $employee->company }}</td>
+                <td>{{ $employee->email }}</td>
+                <td>{{ $employee->phone }}</td>
                 <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    <a href="/employees/{{ $employee->id }}" class="btn btn-primary"><i class="fa fa-file"></i></a>
+                    <a href="/employees/edit/{{ $employee->id }}" class="btn btn-success"><i class="fas fa-edit"></i></a>
+                    <form method="POST" action="/employees/{{ $employee->id }}">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
+                    </form>
                 </td>
             </tr>
-            <tr>
-                <th scope="row">2</th>
-                <td>Bridie Kessler</td>
-                <td>Developer</td>
-                <td>35</td>
-                <td>2014-12-05</td>
-                <td>0987654321</td>
-                <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">3</th>
-                <td>Ashleigh Langosh</td>
-                <td>Finance</td>
-                <td>45</td>
-                <td>2011-08-12</td>
-                <td>0987654321</td>
-                <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">4</th>
-                <td>Angus Grady</td>
-                <td>HR</td>
-                <td>34</td>
-                <td>2012-06-11</td>
-                <td>0987654321</td>
-                <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                </td>
-            </tr>
-            <tr>
-                <th scope="row">5</th>
-                <td>Raheem Lehner</td>
-                <td>Dynamic Division Officer</td>
-                <td>47</td>
-                <td>2011-04-19</td>
-                <td>0987654321</td>
-                <td>
-                    <button type="button" class="btn btn-primary"><i class="far fa-eye"></i></button>
-                    <button type="button" class="btn btn-success"><i class="fas fa-edit"></i></button>
-                    <button type="button" class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                </td>
-            </tr>
+            @endforeach
         </tbody>
       </table>
-      <!-- End Bordered Table -->
+
+      {{ $employees->links() }}
+      
+    @else
+        <p style="color: red">No employees found!</p>
+    @endunless
     </div>
 </div>
 @endsection

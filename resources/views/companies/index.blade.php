@@ -25,7 +25,7 @@
             @foreach ($companies as $company)
             <tr>
                 <th scope="row">{{ $company->id }}</th>
-                <td><img width="100" height="100" src="{{ asset('storage/' . $company->logo)}}"></td>
+                <td><img width="100" height="100" src="{{$company->logo ? asset('storage/' . $company->logo) : asset('images/acumen-logo.jpeg')}}"></td>
                 <td>{{ $company->name }}</td>
                 <td>{{ $company->email }}</td>
                 <td>{{ $company->website }}</td>
@@ -46,7 +46,7 @@
       {{ $companies->links() }}
 
     @else
-      <h5 style="color: red">No companies found!</h5>
+      <p style="color: red">No companies found!</p>
     @endunless()
       
     </div>

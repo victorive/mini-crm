@@ -20,7 +20,7 @@
                 <h5 class="card-title">Companies</h5>
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-cart"></i>
+                    <i class="fa fa-house"></i>
                   </div>
                   <div class="ps-3">
                     <h6>{{ count($companies) }}</h6>
@@ -36,10 +36,10 @@
                 <h5 class="card-title">Employees</h5>
                 <div class="d-flex align-items-center">
                   <div class="card-icon rounded-circle d-flex align-items-center justify-content-center">
-                    <i class="bi bi-currency-dollar"></i>
+                    <i class="fa fa-people-group"></i>
                   </div>
                   <div class="ps-3">
-                    <h6>3,264</h6>
+                    <h6>{{ count($employees) }}</h6>
                   </div>
                 </div>
               </div>

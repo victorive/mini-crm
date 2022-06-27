@@ -13,21 +13,33 @@
         <div class="col-12">
           <label for="name" class="form-label">Company name</label>
           <input type="text" name="name" class="form-control" value="{{ $company->name }}">
+          @error('name')
+            <p style="color: red">{{ $message }}</p>
+          @enderror
         </div>
         <div class="col-12">
             <img width="100" height="100" src="{{ asset('storage/' . $company->logo) }}">
-          </div>
+        </div>
         <div class="col-12">
             <label for="logo" class="form-label">Company logo</label>
             <input type="file" name="logo" class="form-control">
+            @error('logo')
+            <p style="color: red">{{ $message }}</p>
+            @enderror
         </div>
         <div class="col-12">
           <label for="email" class="form-label">Email</label>
           <input type="email" name="email" class="form-control" value="{{ $company->email }}">
+          @error('email')
+            <p style="color: red">{{ $message }}</p>
+          @enderror
         </div>
         <div class="col-12">
           <label for="website" class="form-label">Website</label>
           <input type="url" name="website" class="form-control" value="{{ $company->website }}">
+          @error('website')
+            <p style="color: red">{{ $message }}</p>
+          @enderror
         </div>
         <div class="text-center">
           <button type="submit" class="btn btn-primary">Update Company</button>
