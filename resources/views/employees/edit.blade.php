@@ -3,6 +3,7 @@
 
 {{ session('message') }}
 
+
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Edit employee</h5>
@@ -28,7 +29,7 @@
 
         <div class="col-12">
           <label for="company" class="form-label">Employee Company</label>
-          <select name="company" class="form-select">
+          <select name="company_id" class="form-select">
             @foreach ($companies as $key => $company)
             <option value="{{ $company->id }}">{{ $company->name }}</option>
             @endforeach

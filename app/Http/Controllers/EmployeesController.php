@@ -25,16 +25,22 @@ class EmployeesController extends Controller
 
     public function store(Request $request)
     {
-        $employee = $request->validate([
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'company' => 'required',
-            'email' => 'email',
-            'phone' => 'numeric',
-            'website' => 'url'
-        ]);
+        try{
+            $employee = $request->validate([
+                'first_name' => 'required',
+                'last_name' => 'required',
+                'company' => 'required',
+                'email' => 'email',
+                'phone' => 'numeric',
+                'website' => 'url'
+            ]);
 
-        Employee::create($employee);
+            Employee::create($employee);
+
+        } catch(\Throwable $th) {
+
+            return back()->with('message', 'Employee Creation Failed ' . $th->getMessage());
+        }
 
         return redirect('/employees')->with('message', 'Employee created!');
     }
@@ -54,13 +60,6 @@ class EmployeesController extends Controller
         ]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
         try {
@@ -68,9 +67,9 @@ class EmployeesController extends Controller
             $employee = $request->validate([
                 'first_name' => 'required',
                 'last_name' => 'required',
-                'company_id' => '',
+                'company_id' => 'required',
                 'email' => 'email',
-                'phone' => '',
+                'phone' => 'numeric',
                 'website' => 'url'
             ]);
 
@@ -78,7 +77,7 @@ class EmployeesController extends Controller
                  
         } catch (\Throwable $th) {
             
-            return $th->getMessage();
+            return back()->with('message', 'Employee Update Failed ' . $th->getMessage());
         }
 
         return back()->with('message', 'Employee updated!');
@@ -86,7 +85,14 @@ class EmployeesController extends Controller
 
     public function destroy($id)
     {
-        Employee::where('id', $id)->delete();
+        try {
+
+            Employee::where('id', $id)->delete();
+
+        } catch (\Throwable $th) {
+
+            return back()->with('message', 'Delete Failed ' . $th->getMessage());
+        }
 
         return back()->with('message', 'Employee deleted!');
     }
