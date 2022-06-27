@@ -23,22 +23,29 @@ class CompaniesController extends Controller
 
     public function store(Request $request)
     {
-        $details = $request->validate([
-            'name' => 'required',
-            'email' => 'required', 'email',
-            'website' => 'url'
-        ]);
-
-        if($request->hasFile('logo')){
-
-            // $request->validate([
-            //     'logo' => Rule::dimensions(['min_width=100','min_height=100'])
-            // ]);
+        try {
             
-            $details['logo'] = $request->file('logo')->store('logos', 'public');
-        }
+            $details = $request->validate([
+                'name' => 'required',
+                'email' => 'required', 'email',
+                'website' => 'url'
+            ]);
+    
+            if($request->hasFile('logo')){
+    
+                // $request->validate([
+                //     'logo' => Rule::dimensions(['min_width=100','min_height=100'])
+                // ]);
+                
+                $details['logo'] = $request->file('logo')->store('logos', 'public');
+            }
+    
+            Company::create($details);
 
-        Company::create($details);
+        } catch (\Throwable $th) {
+            
+            return back()->with('message', 'Company Creation Failed ' . $th->getMessage());
+        }
 
         return redirect('/companies')->with('message', 'Company created!');
     }
@@ -59,29 +66,43 @@ class CompaniesController extends Controller
 
     public function update(Request $request, $id)
     {
-        $details = $request->validate([
-            'name' => 'required',
-            'email' => ['required', 'email'],
-            'website' => 'required'
-        ]);
-
-        if($request->hasFile('logo')){
-
-            // $request->validate([
-            //     'logo' => Rule::dimensions(['min_width=100','min_height=100'])
-            // ]);
+        try {
             
-            $details['logo'] = $request->file('logo')->store('logos', 'public');
-        }
+            $details = $request->validate([
+                'name' => 'required',
+                'email' => ['required', 'email'],
+                'website' => 'required'
+            ]);
+    
+            if($request->hasFile('logo')){
+    
+                // $request->validate([
+                //     'logo' => Rule::dimensions(['min_width=100','min_height=100'])
+                // ]);
+                
+                $details['logo'] = $request->file('logo')->store('logos', 'public');
+            }
+    
+            Company::where('id', $id)->update($details);
 
-        Company::where('id', $id)->update($details);
+        } catch (\Throwable $th) {
+            
+            return back()->with('message', 'Company Update Failed ' . $th->getMessage());
+        }
 
         return back()->with('message', 'Company updated!');
     }
 
     public function destroy($id)
     {
-        Company::where('id', $id)->delete();
+        try {
+            
+            Company::where('id', $id)->delete();
+
+        } catch (\Throwable $th) {
+            
+            return back()->with('message', 'Delete Failed ' . $th->getMessage());;
+        }
 
         return back()->with('message', 'Company deleted');
     }
