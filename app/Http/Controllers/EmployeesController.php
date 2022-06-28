@@ -12,7 +12,7 @@ class EmployeesController extends Controller
     public function index()
     {
         return view('employees.index', [
-            'employees' => Employee::with('company')->paginate(10)
+            'employees' => Employee::paginate(10)
         ]);
     }
 

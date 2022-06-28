@@ -27,7 +27,7 @@
                 <th scope="row">{{ $employee->id }}</th>
                 <td>{{ $employee->first_name }}</td>
                 <td>{{ $employee->last_name }}</td>
-                <td>{{ $employee->company_id }}</td>
+                <td>{{ $employee->company->name }}</td>
                 <td>{{ $employee->email }}</td>
                 <td>{{ $employee->phone }}</td>
                 <td>
