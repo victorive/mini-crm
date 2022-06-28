@@ -11,7 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
-    <script src="{{ asset('js/main.js') }}" defer></script>
+    
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -23,12 +23,12 @@
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm fixed-top">
+        <nav class="bg-white shadow-sm navbar navbar-expand-md navbar-light fixed-top">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
                 </a>
-                <i class="navbar-toggler toggle-sidebar-btn"></i>
+                <i class="fa fa-bars toggle-sidebar-btn"></i>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
                 </button>
@@ -66,6 +66,8 @@
                                                      document.getElementById('logout-form').submit();">
                                         {{ __('Logout') }}
                                     </a>
+                                    <a class="dropdown-item" href="{{ route('companies') }}">Companies</a>
+                                    <a class="dropdown-item" href="{{ route('employees') }}">Employees</a>
 
                                     <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                         @csrf
@@ -79,7 +81,7 @@
         </nav>
 
         @auth
-        <aside id="sidebar" class="sidebar bg-white shadow-sm">
+        <aside id="sidebar" class="bg-white shadow-sm sidebar">
             <ul class="sidebar-nav" id="sidebar-nav">
               <li class="nav-item">
                 <a class="nav-link " href="/home">
@@ -107,4 +109,5 @@
         </main>
     </div>
 </body>
+<script src="{{ asset('js/main.js') }}" defer></script>
 </html>
