@@ -25,24 +25,16 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make('password')
         ]);
 
-        $company = Company::factory()->create([
-            'name' => 'Test Test',
-            'email' => 'test@test.com', 
-            'website' => 'https://test.com'
-        ]);
+        for($i = 1; $i < 12; $i++){
+            $company = Company::factory()->create([
+                'name' => 'Company ' . $i,
+                'email' => 'test@test.com', 
+                'website' => 'https://test.com'
+            ]);
 
-        $company2 = Company::factory()->create([
-            'name' => 'Company 2',
-            'email' => 'test@test.com', 
-            'website' => 'https://test.com'
-        ]);
-
-        Employee::factory(10)->create([
-            'company_id' => $company->id
-        ]);
-
-        Employee::factory(10)->create([
-            'company_id' => $company2->id
-        ]);
+            Employee::factory(5)->create([
+                'company_id' => $company->id
+            ]);
+        }
     }
 }
