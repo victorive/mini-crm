@@ -26,7 +26,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         for($i = 1; $i < 12; $i++){
-            $company = Company::factory()->create([
+            $company = Company::create([
                 'name' => 'Company ' . $i,
                 'email' => 'test@test.com', 
                 'website' => 'https://test.com'

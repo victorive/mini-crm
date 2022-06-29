@@ -1,6 +1,8 @@
 @extends('layouts.app')
 @section('content')
 
+{{ session('message') }}
+
 <div class="card">
     <div class="card-body">
       <h5 class="card-title">Create new employee</h5>
@@ -24,15 +26,15 @@
         </div>
 
         <div class="col-12">
-          <label for="company" class="form-label">Employee Company</label>
+          <label for="company_id" class="form-label">Employee Company</label>
 
-          <select name="company" class="form-select">
-          @foreach ($companies as $key => $company)
+          <select name="company_id" class="form-select">
+          @foreach ($companies as $company)
             <option value="{{ $company->id }}">{{ $company->name }}</option>
           @endforeach
           </select>
 
-          @error('company')
+          @error('company_id')
             <p style="color: red">{{ $message }}</p>
           @enderror
         </div>
@@ -49,14 +51,6 @@
           <label for="phone" class="form-label">Phone</label>
           <input type="tel" name="phone" class="form-control">
           @error('phone')
-            <p style="color: red">{{ $message }}</p>
-          @enderror
-        </div>
-
-        <div class="col-12">
-          <label for="website" class="form-label">Website</label>
-          <input type="url" name="website" class="form-control">
-          @error('website')
             <p style="color: red">{{ $message }}</p>
           @enderror
         </div>

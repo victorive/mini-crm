@@ -29,17 +29,16 @@ class EmployeesController extends Controller
             $employee = $request->validate([
                 'first_name' => 'required',
                 'last_name' => 'required',
-                'company' => 'required',
+                'company_id' => 'required',
                 'email' => 'email',
                 'phone' => 'numeric',
-                'website' => 'url'
             ]);
 
             Employee::create($employee);
 
         } catch(\Throwable $th) {
 
-            return back()->with('message', 'Employee Creation Failed ' . $th->getMessage());
+            return back()->with('message', 'Employee Creation Failed! ' . $th->getMessage());
         }
 
         return redirect('/employees')->with('message', 'Employee created!');
@@ -70,14 +69,13 @@ class EmployeesController extends Controller
                 'company_id' => 'required',
                 'email' => 'email',
                 'phone' => 'numeric',
-                'website' => 'url'
             ]);
 
             Employee::where('id', $id)->update($employee);
                  
         } catch (\Throwable $th) {
             
-            return back()->with('message', 'Employee Update Failed ' . $th->getMessage());
+            return back()->with('message', 'Employee Update Failed! ' . $th->getMessage());
         }
 
         return back()->with('message', 'Employee updated!');
@@ -91,7 +89,7 @@ class EmployeesController extends Controller
 
         } catch (\Throwable $th) {
 
-            return back()->with('message', 'Delete Failed ' . $th->getMessage());
+            return back()->with('message', 'Delete Failed! ' . $th->getMessage());
         }
 
         return back()->with('message', 'Employee deleted!');

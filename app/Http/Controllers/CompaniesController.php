@@ -44,7 +44,7 @@ class CompaniesController extends Controller
 
         } catch (\Throwable $th) {
             
-            return back()->with('message', 'Company Creation Failed ' . $th->getMessage());
+            return back()->with('message', 'Company Creation Failed! ' . $th->getMessage());
         }
 
         return redirect('/companies')->with('message', 'Company created!');
@@ -87,7 +87,7 @@ class CompaniesController extends Controller
 
         } catch (\Throwable $th) {
             
-            return back()->with('message', 'Company Update Failed ' . $th->getMessage());
+            return back()->with('message', 'Company Update Failed! ' . $th->getMessage());
         }
 
         return back()->with('message', 'Company updated!');
@@ -101,7 +101,7 @@ class CompaniesController extends Controller
 
         } catch (\Throwable $th) {
             
-            return back()->with('message', 'Delete Failed ' . $th->getMessage());;
+            return back()->with('message', 'Delete Failed! ' . $th->getMessage());;
         }
 
         return back()->with('message', 'Company deleted');
