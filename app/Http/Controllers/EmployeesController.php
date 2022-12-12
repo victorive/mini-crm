@@ -25,21 +25,16 @@ class EmployeesController extends Controller
 
     public function store(Request $request)
     {
-        try{
-            $employee = $request->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'company_id' => 'required',
-                'email' => 'email',
-                'phone' => 'numeric',
-            ]);
+        $employee = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'company_id' => 'required',
+            'email' => 'email',
+            'phone' => 'numeric',
+            'website' => 'url'
+        ]);
 
-            Employee::create($employee);
-
-        } catch(\Throwable $th) {
-
-            return back()->with('message', 'Employee Creation Failed! ' . $th->getMessage());
-        }
+        Employee::create($employee);
 
         return redirect('/employees')->with('message', 'Employee created!');
     }
@@ -61,36 +56,23 @@ class EmployeesController extends Controller
 
     public function update(Request $request, $id)
     {
-        try {
+        $employee = $request->validate([
+            'first_name' => 'required',
+            'last_name' => 'required',
+            'company_id' => 'required',
+            'email' => 'email',
+            'phone' => 'numeric',
+            'website' => 'url'
+        ]);
 
-            $employee = $request->validate([
-                'first_name' => 'required',
-                'last_name' => 'required',
-                'company_id' => 'required',
-                'email' => 'email',
-                'phone' => 'numeric',
-            ]);
-
-            Employee::where('id', $id)->update($employee);
-                 
-        } catch (\Throwable $th) {
-            
-            return back()->with('message', 'Employee Update Failed! ' . $th->getMessage());
-        }
-
+        Employee::where('id', $id)->update($employee);
+                
         return back()->with('message', 'Employee updated!');
     }
 
     public function destroy($id)
     {
-        try {
-
-            Employee::where('id', $id)->delete();
-
-        } catch (\Throwable $th) {
-
-            return back()->with('message', 'Delete Failed! ' . $th->getMessage());
-        }
+        Employee::where('id', $id)->delete();
 
         return back()->with('message', 'Employee deleted!');
     }
