@@ -17,10 +17,10 @@ class CompanyFactory extends Factory
     public function definition()
     {
         // return [
-        //     'logo' => $this->faker->image(),
-        //     'name' => $this->faker->company(),
-        //     'email' => $this->faker->email(),
-        //     'website' => $this->faker->url()
-        ];
+        //      'logo' => $this->faker->image(),
+        //      'name' => $this->faker->company(),
+        //      'email' => $this->faker->email(),
+        //      'website' => $this->faker->url()
+        // ];
     }
 }
